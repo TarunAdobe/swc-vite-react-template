@@ -1,0 +1,11 @@
+#mainArea {
+  height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--spectrum-gray-100);
+}
+
+p {
+  color: var(--spectrum-gray-900);
+}
