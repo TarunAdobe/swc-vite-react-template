@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Not sure how to define these values */
+    padding: 10px 20px;
+    border-bottom: 0.05rem solid var(--spectrum-gray-00);
+    background-color: var(--spectrum-gray-50);
+    box-shadow: 0 0 1em var(--spectrum-gray-300);
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: var(--spectrum-avatar-size-200);
+    margin-right: 10px;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+sp-button {
+    margin-left: 10px;
+}
