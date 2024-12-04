@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import '@spectrum-web-components/theme/sp-theme.js';
 
@@ -19,8 +19,6 @@ import { Header } from './components/Header/header';
 import { Sidebar } from './components/Sidebar/sidebar';
 
 function App() {
-
-  const toastRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
 
@@ -41,6 +39,10 @@ function App() {
   const [system, setSystem] = useState('spectrum-two');
   const [scale, setScale] = useState('medium');
 
+  // Toast
+  const [showToast, setShowToast] = useState(false);
+  const [toastContent, setToastContent] = useState('');
+
   return (
     <sp-theme scale={scale} system={system} color={color}>
       <div id="mainArea">
@@ -60,14 +62,11 @@ function App() {
           scale={scale}
         />
         <Sidebar onToastOpen={(msg) => {
-          const toast = toastRef.current;
-          if (toast) {
-            toast.open = true;
-            toast.textContent = msg;
-          }
+          setShowToast(true);
+          setToastContent(msg);
         }} />
-        <sp-toast ref={toastRef} variant="info">
-          This is important information that you should read, soon.
+        <sp-toast open={showToast} variant="info" onclose={() => setShowToast(false)}>
+          {toastContent}
         </sp-toast>
       </div>
     </sp-theme >

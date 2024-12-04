@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import './header.css';
 
-import { useEffect, useRef } from 'react';
-
 import '@spectrum-web-components/button/sp-button.js';
 import '@spectrum-web-components/avatar/sp-avatar.js';
 import '@spectrum-web-components/icon/sp-icon.js';
@@ -30,41 +28,6 @@ interface HeaderProps {
 
 export function Header({ updateThemeProps, color, system, scale }: HeaderProps) {
 
-    const colorPickerRef = useRef<HTMLDivElement>(null);
-    const scalePickerRef = useRef<HTMLDivElement>(null);
-    const systemPickerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-
-        console.log('Header Color: ', color)
-
-        const colorPicker = colorPickerRef.current;
-        if (colorPicker) {
-            colorPicker.addEventListener('change', (event: Event) => {
-                const target = event.target as HTMLInputElement;
-                updateThemeProps(target.value, system, scale);
-            });
-        }
-
-        const systemPicker = systemPickerRef.current;
-        if (systemPicker) {
-            systemPicker.addEventListener('change', (event: Event) => {
-                const target = event.target as HTMLInputElement;
-                updateThemeProps(color, target.value, scale);
-            });
-        }
-
-        const scalePicker = scalePickerRef.current;
-        if (scalePicker) {
-            scalePicker.addEventListener('change', (event: Event) => {
-                const target = event.target as HTMLInputElement;
-                updateThemeProps(color, system, target.value);
-            });
-        }
-
-
-    }, [color, system, scale, updateThemeProps]);
-
     return (
         <header className="header">
 
@@ -90,7 +53,10 @@ export function Header({ updateThemeProps, color, system, scale }: HeaderProps) 
                             <sp-picker
                                 id="color-picker"
                                 value={color}
-                                ref={colorPickerRef}
+                                onchange={(event: any) => {
+                                    const target = event.target as HTMLInputElement;
+                                    updateThemeProps(target.value, system, scale);
+                                }}
                             >
                                 <sp-menu-item value="dark">Dark</sp-menu-item>
                                 <sp-menu-item value="light">Light</sp-menu-item>
@@ -100,7 +66,10 @@ export function Header({ updateThemeProps, color, system, scale }: HeaderProps) 
                             <sp-picker
                                 id="system-picker"
                                 value={system}
-                                ref={systemPickerRef}
+                                onchange={(event: any) => {
+                                    const target = event.target as HTMLInputElement;
+                                    updateThemeProps(color, target.value, scale);
+                                }}
                             >
                                 <sp-menu-item value="spectrum">Spectrum</sp-menu-item>
                                 <sp-menu-item value="spectrum-two">Spectrum Two</sp-menu-item>
@@ -110,7 +79,10 @@ export function Header({ updateThemeProps, color, system, scale }: HeaderProps) 
                             <sp-picker
                                 id="scale-picker"
                                 value={scale}
-                                ref={scalePickerRef}
+                                onchange={(event: any) => {
+                                    const target = event.target as HTMLInputElement;
+                                    updateThemeProps(color, system, target.value);
+                                }}
                             >
                                 <sp-menu-item value="medium">Medium</sp-menu-item>
                                 <sp-menu-item value="large">Large</sp-menu-item>
@@ -138,6 +110,6 @@ export function Header({ updateThemeProps, color, system, scale }: HeaderProps) 
 
 
             </div>
-        </header>
+        </header >
     );
 }

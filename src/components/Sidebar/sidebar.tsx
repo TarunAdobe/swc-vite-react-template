@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import './sidebar.css';
 
-import { useEffect, useRef } from 'react';
-
 import '@spectrum-web-components/action-button/sp-action-button.js';
 import '@spectrum-web-components/accordion/sp-accordion.js';
 import '@spectrum-web-components/accordion/sp-accordion-item.js';
@@ -13,21 +11,7 @@ import '@spectrum-web-components/divider/sp-divider.js'
 import '@spectrum-web-components/slider/sp-slider.js';
 import '@spectrum-web-components/toast/sp-toast.js';
 
-export function Sidebar({ onToastOpen }: { onToastOpen: (string) => void }) {
-
-
-    const actionGroupRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const actionGroup = actionGroupRef.current;
-        if (actionGroup) {
-            actionGroup.addEventListener('change', (event: Event) => {
-                const target = event.target as HTMLInputElement;
-                console.log('Action Group: ', target.selected);
-                onToastOpen(`Selected ${target.selected} in the styles Action Group: `);
-            });
-        }
-    }, []);
+export function Sidebar({ onToastOpen }: { onToastOpen: (msg: string) => void }) {
 
     return (
         <div id="sidebar">
@@ -61,15 +45,22 @@ export function Sidebar({ onToastOpen }: { onToastOpen: (string) => void }) {
 
                 <sp-accordion-item label="Styles" open>
 
-                    <sp-action-group selects="single" ref={actionGroupRef}>
+                    <sp-action-group selects="single"
+                        onchange={(event: any) => {
+                            const target = event.target as HTMLInputElement;
+                            onToastOpen(`Selected ${target.selected} in the styles Action Group!`);
+                        }}
+                    >
                         <sp-action-button variant="primary">Transparent</sp-action-button>
                         <sp-action-button variant="primary">Solid</sp-action-button>
                         <sp-action-button variant="primary">Dashed</sp-action-button>
                         <sp-action-button variant="primary">Dotted</sp-action-button>
                         <sp-action-button variant="primary">Double</sp-action-button>
                     </sp-action-group>
-            
-                    <sp-slider label="Intensity" editable></sp-slider>
+
+                    <sp-slider label="Intensity" editable
+                        onchange={(event: any) => console.log('changed something?', event)}
+                    ></sp-slider>
                 </sp-accordion-item>
 
             </sp-accordion>
