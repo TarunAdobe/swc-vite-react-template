@@ -21,11 +21,9 @@
     svg path {
         fill: var(--spectrum-gray-900);
     }
-
-   
 }
 
-.dropzone-content{
+.dropzone-content {
     display: flex;
     justify-content: space-around;
     gap: 1em;
@@ -35,6 +33,11 @@
     background-color: var(--spectrum-gray-100);
     padding-left: 2em;
     padding-right: 2em;
+}
+
+.dropzone-label {
+    font-size: 0.8em;
+    color: var(--spectrum-gray-800);
 }
 
 sp-accordion-item sp-slider {

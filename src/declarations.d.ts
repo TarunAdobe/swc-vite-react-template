@@ -110,6 +110,12 @@ declare namespace JSX {
 
 declare namespace JSX {
   interface IntrinsicElements {
+    'sp-link': any;
+  }
+}
+
+declare namespace JSX {
+  interface IntrinsicElements {
     'sp-switch': any;
   }
 }

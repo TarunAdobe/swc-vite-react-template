@@ -44,7 +44,7 @@ export function Header({ updateThemeProps, color, system, scale }: HeaderProps) 
                     <sp-tooltip self-managed placement="bottom" offset={4}>Theme Settings</sp-tooltip>
                 </sp-action-button>
 
-                <sp-overlay trigger="trigger@click" placement="bottom" offset={4}>
+                <sp-overlay trigger="trigger@click" placement="bottom-end" offset={4}>
                     <sp-popover>
                         <sp-dialog>
                             <h2 slot="heading">Welcome Tarat!</h2>
