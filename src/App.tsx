@@ -68,7 +68,6 @@ function App() {
           {toastContent}
         </Toast>
       </div>
-      <div id="contentArea">Hello World</div>
     </SpTheme>
   );
 }

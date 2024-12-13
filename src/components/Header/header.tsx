@@ -13,10 +13,8 @@ import "@spectrum-web-components/dialog/sp-dialog-wrapper.js";
 import "@spectrum-web-components/textfield/sp-textfield.js";
 import "@spectrum-web-components/field-label/sp-field-label.js";
 import "@spectrum-web-components/menu/sp-menu-item.js";
-
-import { ActionButton } from "../../swc-typing/ActionButton";
-import { LightIcon } from "../../swc-typing/Icons";
-import { Tooltip } from "../../swc-typing/Tooltip";
+import '@spectrum-web-components/icons-workflow/icons/sp-icon-light.js';
+import "@spectrum-web-components/tooltip/sp-tooltip.js";
 
 import { Color, Scale, SystemVariant } from "@spectrum-web-components/theme";
 
@@ -37,18 +35,19 @@ export function Header({
 }: HeaderProps) {
   return (
     <header className="header">
+
       <div className="left-section">
         <img src={Logo} alt="Logo" className="logo" />
         <p className="">SWC Test App</p>
       </div>
 
       <div className="right-section">
-        <ActionButton id="trigger" quiet>
-          <LightIcon slot="icon" size="s" name="user"></LightIcon>
-          <Tooltip self-managed placement="bottom" offset={4}>
+        <sp-action-button id="trigger" quiet>
+          <sp-icon-light size="m"></sp-icon-light>
+          <sp-tooltip self-managed placement="bottom" offset={4}>
             Theme Settings
-          </Tooltip>
-        </ActionButton>
+          </sp-tooltip>
+        </sp-action-button>
 
         <sp-overlay trigger="trigger@click" placement="bottom" offset={4}>
           <sp-popover>
@@ -63,7 +62,7 @@ export function Header({
                 value={color}
                 onchange={(event: any) => {
                   const target = event.target as HTMLInputElement;
-                  updateThemeProps(target.value, system, scale);
+                  updateThemeProps(target.value as Color, system, scale);
                 }}
               >
                 <sp-menu-item value="dark">Dark</sp-menu-item>
@@ -78,7 +77,7 @@ export function Header({
                 value={system}
                 onchange={(event: any) => {
                   const target = event.target as HTMLInputElement;
-                  updateThemeProps(color, target.value, scale);
+                  updateThemeProps(color, target.value as SystemVariant, scale);
                 }}
               >
                 <sp-menu-item value="spectrum">Spectrum</sp-menu-item>
@@ -93,7 +92,7 @@ export function Header({
                 value={scale}
                 onchange={(event: any) => {
                   const target = event.target as HTMLInputElement;
-                  updateThemeProps(color, system, target.value);
+                  updateThemeProps(color, system, target.value as Scale);
                 }}
               >
                 <sp-menu-item value="medium">Medium</sp-menu-item>
@@ -105,19 +104,23 @@ export function Header({
 
         <sp-button variant="primary" quiet id="signin-modal-trigger">
           sign in
-          <Tooltip self-managed placement="bottom" offset={4}>
+          <sp-tooltip self-managed placement="bottom" offset={4}>
             Sign in
-          </Tooltip>
+          </sp-tooltip>
         </sp-button>
 
         <sp-overlay trigger="signin-modal-trigger@click" type="modal">
           <sp-dialog-wrapper headline="Signin form" dismissable underlay>
-            <p>I am a modal type overlay.</p>
+
             <sp-field-label>Enter your email</sp-field-label>
-            <sp-textfield placeholder="test@gmail.com"></sp-textfield>
-            <sp-action-button>Sign in</sp-action-button>
+            <div className="modal-inputs">
+              <sp-textfield placeholder="test@gmail.com"></sp-textfield>
+              <sp-action-button>Sign in</sp-action-button>
+            </div>
+
           </sp-dialog-wrapper>
         </sp-overlay>
+
       </div>
     </header>
   );

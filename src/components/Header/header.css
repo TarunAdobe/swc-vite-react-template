@@ -28,3 +28,9 @@
 sp-button {
     margin-left: 10px;
 }
+
+.modal-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
